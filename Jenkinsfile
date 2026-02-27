@@ -20,7 +20,11 @@ pipeline {
         stage('Run App') {
             steps {
                 dir('nodeapp') {
-                    bat 'node index.js'
+                    bat '''
+                    start /B node index.js
+                    timeout /t 5
+                    taskkill /IM node.exe /F
+                    '''
                 }
             }
         }
