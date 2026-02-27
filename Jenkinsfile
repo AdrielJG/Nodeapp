@@ -21,21 +21,10 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Run App') {
             steps {
                 dir('nodeapp') {
-                    bat 'echo Build successful'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                dir('nodeapp') {
-                    bat '''
-                    taskkill /IM node.exe /F 2>nul
-                    start cmd /c "npm start"
-                    '''
+                    bat 'node index.js'
                 }
             }
         }
