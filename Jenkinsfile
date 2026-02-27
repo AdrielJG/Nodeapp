@@ -6,35 +6,36 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/your-repo.git'
+                git branch: 'main', url: 'https://github.com/AdrielJG/Nodeapp.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'echo "No tests configured"'
+                bat 'echo No tests configured'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'echo "Build successful"'
+                bat 'echo Build successful'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh '''
-                pkill node || true
-                nohup npm start &
+                bat '''
+                taskkill /IM node.exe /F 2>nul
+                start cmd /c "npm start"
                 '''
             }
         }
