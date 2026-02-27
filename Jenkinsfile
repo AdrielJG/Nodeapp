@@ -15,28 +15,28 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                bat 'echo No tests configured'
+                dir('nodeapp') {
+                    bat 'npm install'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                bat 'echo Build successful'
+                dir('nodeapp') {
+                    bat 'echo Build successful'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                bat '''
-                taskkill /IM node.exe /F 2>nul
-                start cmd /c "npm start"
-                '''
+                dir('nodeapp') {
+                    bat '''
+                    taskkill /IM node.exe /F 2>nul
+                    start cmd /c "npm start"
+                    '''
+                }
             }
         }
     }
